@@ -13,6 +13,8 @@
   --bg-input: hsl(calc(var(--main) - 4), 65%, 7%);
   --bg-tb-header: hsl(calc(var(--main) - 1), 72%, 13%);
   --bg-tb-tr: hsl(calc(var(--main) - 1), 64%, 6%);
+  --bg-tb-tr-even: hsla(calc(var(--main) - 1), 64%, 6%, 0.5);
+  --b-tb: hsl(calc(var(--main) - 4), 31%, 42%);
 
   font-size: 6.25%;
 }
@@ -71,6 +73,8 @@ header {
       border: none;
       border-radius: 8rem;
 
+      cursor: pointer;
+
       display: flex;
       align-items: center;
       gap: 8rem;
@@ -83,40 +87,143 @@ header {
         color: var(--text);
       }
     }
+
+    button:active {
+      transform: scale(0.95);
+    }
   }
 }
 
 table {
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 12rem;
+  border: 1px solid var(--b-tb);
+
+  thead,
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
   thead {
     background-color: var(--bg-tb-header);
+    border-radius: 12rem 12rem 0 0;
+
+    :first-child {
+      text-align: start;
+    }
+
+    :not(:first-child) {
+      width: 220rem;
+    }
+
+    th {
+      padding: 16rem 40rem;
+    }
+
+    th:first-child {
+      border-top-left-radius: 12rem;
+    }
+
+    th:last-child {
+      border-top-right-radius: 12rem;
+    }
   }
 
   tbody {
-    background-color: var(--bg-input);
+    display: block;
+    max-height: 400rem;
+    overflow-y: overlay;
+    border-radius: 0 0 12rem 12rem;
+
+    tr:last-child {
+      td:first-child {
+        border-bottom-left-radius: 12rem;
+      }
+
+      td:last-child {
+        border-bottom-right-radius: 12rem;
+        border-bottom: none;
+      }
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--bg-tb-tr-even);
+    }
 
     tr {
-      td {
-        text-align: start;
+      background-color: var(--bg-input);
 
+      td:first-child {
+        border-left: 1px solid var(--b-tb);
+      }
+
+      td:last-child {
+        border-right: 1px solid var(--b-tb);
+      }
+
+      td {
+        text-align: center;
+        font-weight: 700;
+
+        border-bottom: 1px solid var(--b-tb);
+        padding: 16rem 40rem;
+      }
+
+      .user {
         display: flex;
         align-items: center;
         gap: 16rem;
 
-        #img {
+        img {
           width: 56rem;
           height: 56rem;
           border-radius: 50%;
-
-          background-color: teal;
         }
 
-        div {
+        .user-info {
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: start;
           gap: 8rem;
+
+          .username {
+            font-weight: 400;
+          }
         }
+      }
+
+      .remove button {
+        font-size: 16rem;
+        font-weight: 700;
+        color: red;
+        background-color: transparent;
+        border: none;
+      }
+
+      .remove button:hover {
+        cursor: pointer;
+        font-size: 16.5rem;
       }
     }
   }
+}
+tbody {
+  position: relative;
+  overflow-y: auto;
+}
+
+tbody::-webkit-scrollbar {
+  width: 6rem;
+}
+
+tbody::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+tbody::-webkit-scrollbar-thumb {
+  background-color: var(--b-tb);
+  border-radius: 10rem;
 }
