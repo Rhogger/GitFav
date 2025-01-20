@@ -10,6 +10,8 @@
   --bg-main: hsl(0, 0%, 0%);
   --bg-btn: hsl(var(--main), 91%, 25%);
   --text: hsl(0, 0%, 100%);
+  --text-empty: hsl(189, 4%, 32%);
+
   --bg-input: hsl(calc(var(--main) - 4), 65%, 7%);
   --bg-tb-header: hsl(calc(var(--main) - 1), 72%, 13%);
   --bg-tb-tr: hsl(calc(var(--main) - 1), 64%, 6%);
@@ -134,8 +136,7 @@ table {
 
   tbody {
     display: block;
-    max-height: 400rem;
-    overflow-y: overlay;
+    min-height: 400rem;
     border-radius: 0 0 12rem 12rem;
 
     tr:last-child {
@@ -155,14 +156,6 @@ table {
 
     tr {
       background-color: var(--bg-input);
-
-      td:first-child {
-        border-left: 1px solid var(--b-tb);
-      }
-
-      td:last-child {
-        border-right: 1px solid var(--b-tb);
-      }
 
       td {
         text-align: center;
@@ -210,20 +203,38 @@ table {
     }
   }
 }
-tbody {
-  position: relative;
-  overflow-y: auto;
+
+.empty {
+  height: 400rem;
+  border-radius: 0 0 12rem 12rem;
 }
 
-tbody::-webkit-scrollbar {
+td.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60rem;
+}
+
+td.empty img {
+  width: 120rem;
+}
+
+td.empty p {
+  font-size: 40rem;
+  font-weight: bold;
+  color: var(--text-empty);
+}
+
+::-webkit-scrollbar {
   width: 6rem;
 }
 
-tbody::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-tbody::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: var(--b-tb);
   border-radius: 10rem;
 }
